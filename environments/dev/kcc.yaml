@@ -1,0 +1,108 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+apiVersion: v1
+kind: Namespace
+metadata: # kpt-merge: /packagename
+  name: packagename
+  annotations:
+    cnrm.cloud.google.com/project-id: googleprojectid
+    internal.kpt.dev/upstream-identifier: '|Namespace|default|packagename'
+---
+apiVersion: core.cnrm.cloud.google.com/v1beta1
+kind: ConfigConnectorContext
+metadata: # kpt-merge: packagename/configconnectorcontext.core.cnrm.cloud.google.com
+  name: configconnectorcontext.core.cnrm.cloud.google.com
+  namespace: packagename
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'core.cnrm.cloud.google.com|ConfigConnectorContext|packagename|configconnectorcontext.core.cnrm.cloud.google.com'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+spec:
+  googleServiceAccount: cc-robot@googleprojectid.iam.gserviceaccount.com
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata: # kpt-merge: cnrm-system/cnrm-controller-manager-packagename
+  name: cnrm-controller-manager-packagename
+  namespace: cnrm-system
+  annotations:
+    config.kubernetes.io/local-config: generated
+    internal.kpt.dev/upstream-identifier: '|ServiceAccount|cnrm-system|cnrm-controller-manager-packagename'
+  ownerReferences:
+  - apiVersion: core.cnrm.cloud.google.com/v1beta1
+    kind: ConfigConnectorContext
+    name: configconnectorcontext.core.cnrm.cloud.google.com
+    namespace: packagename
+---
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMServiceAccount
+metadata: # kpt-merge: config-control/packagename-cc-robot
+  name: packagename-cc-robot
+  namespace: config-control
+  annotations:
+    cnrm.cloud.google.com/project-id: googleprojectid
+    internal.kpt.dev/upstream-identifier: 'iam.cnrm.cloud.google.com|IAMServiceAccount|config-control|packagename-cc-robot'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+spec:
+  displayName: ConfigConnector ServiceAccount
+  resourceID: cc-robot
+---
+apiVersion: porch.kpt.dev/v1alpha1
+kind: WorkloadIdentityBinding
+metadata: # kpt-merge: config-control/packagename-cnrm-controller-manager
+  name: packagename-cnrm-controller-manager
+  namespace: config-control
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'porch.kpt.dev|WorkloadIdentityBinding|config-control|packagename-cnrm-controller-manager'
+spec:
+  resourceRef:
+    apiVersion: iam.cnrm.cloud.google.com/v1beta1
+    kind: IAMServiceAccount
+    name: packagename-cc-robot
+  serviceAccountRef:
+    name: cnrm-controller-manager-packagename
+    namespace: cnrm-system
+---
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata: # kpt-merge: config-control/packagename-cc-robot
+  name: packagename-cc-robot
+  namespace: config-control
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'iam.cnrm.cloud.google.com|IAMPolicyMember|config-control|packagename-cc-robot'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+spec:
+  memberFrom:
+    serviceAccountRef:
+      name: packagename-cc-robot
+  role: roles/owner
+  resourceRef:
+    apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+    kind: Project
+    name: packagename
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: # kpt-merge: config-control/packagename-cnrm:cnrm-viewer
+  name: "packagename-cnrm:cnrm-viewer"
+  namespace: config-control
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|RoleBinding|config-control|packagename-cnrm:cnrm-viewer'
+subjects:
+- kind: ServiceAccount
+  namespace: cnrm-system
+  name: cnrm-controller-manager-packagename
+roleRef:
+  kind: ClusterRole
+  name: cnrm-viewer
+  apiGroup: rbac.authorization.k8s.io
