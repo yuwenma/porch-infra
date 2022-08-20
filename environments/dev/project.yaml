@@ -14,33 +14,33 @@
 apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
 kind: Folder
 metadata: # kpt-merge: config-control/packagename
-  name: packagename
+  name: dev
   namespace: config-control
   annotations:
     internal.kpt.dev/upstream-identifier: 'resourcemanager.cnrm.cloud.google.com|Folder|config-control|packagename'
-    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'
 spec:
-  displayName: packagename
+  displayName: dev
   folderRef:
     name: environments
 ---
 apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
 kind: Project
 metadata: # kpt-merge: config-control/packagename
-  name: packagename
+  name: dev
   namespace: config-control
   annotations:
     internal.kpt.dev/upstream-identifier: 'resourcemanager.cnrm.cloud.google.com|Project|config-control|packagename'
-    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'
 spec:
-  name: packagename
+  name: dev-yuwenma-gke-catalyst-googl
   folderRef:
     name: environments
   billingAccountRef:
     #name: default
     # TODO: Is there a BillingAccount ref?
     external: 016C6E-5D5038-702920
-  resourceID: googleprojectid
+  resourceID: dev-yuwenma-gke-catalyst--ryh5
 ---
 # We need to enable some services so we can enable other services
 apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
@@ -49,10 +49,10 @@ metadata: # kpt-merge: config-control/packagename-serviceusage
   annotations:
     cnrm.cloud.google.com/deletion-policy: "abandon"
     internal.kpt.dev/upstream-identifier: 'serviceusage.cnrm.cloud.google.com|Service|config-control|packagename-serviceusage'
-    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
-  name: packagename-serviceusage
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'
+  name: dev-serviceusage
   namespace: config-control
 spec:
   resourceID: serviceusage.googleapis.com
   projectRef:
-    name: packagename
+    name: dev

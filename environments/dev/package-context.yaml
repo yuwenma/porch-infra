@@ -4,5 +4,6 @@ metadata:
   name: kptfile.kpt.dev
   annotations:
     config.kubernetes.io/local-config: "true"
+    config.kubernetes.io/parent-path: "google.com/gke-catalyst/yuwenma"
 data:
   name: dev

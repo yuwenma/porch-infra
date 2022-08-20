@@ -14,26 +14,27 @@
 apiVersion: v1
 kind: Namespace
 metadata: # kpt-merge: /packagename
-  name: packagename
+  name: dev
   annotations:
-    cnrm.cloud.google.com/project-id: googleprojectid
+    cnrm.cloud.google.com/project-id: dev-yuwenma-gke-catalyst--ryh5
     internal.kpt.dev/upstream-identifier: '|Namespace|default|packagename'
+  namespace: ""
 ---
 apiVersion: core.cnrm.cloud.google.com/v1beta1
 kind: ConfigConnectorContext
 metadata: # kpt-merge: packagename/configconnectorcontext.core.cnrm.cloud.google.com
   name: configconnectorcontext.core.cnrm.cloud.google.com
-  namespace: packagename
+  namespace: dev
   annotations:
     internal.kpt.dev/upstream-identifier: 'core.cnrm.cloud.google.com|ConfigConnectorContext|packagename|configconnectorcontext.core.cnrm.cloud.google.com'
-    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'
 spec:
-  googleServiceAccount: cc-robot@googleprojectid.iam.gserviceaccount.com
+  googleServiceAccount: cc-robot@dev-yuwenma-gke-catalyst--ryh5.iam.gserviceaccount.com
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata: # kpt-merge: cnrm-system/cnrm-controller-manager-packagename
-  name: cnrm-controller-manager-packagename
+  name: cnrm-controller-manager-dev
   namespace: cnrm-system
   annotations:
     config.kubernetes.io/local-config: generated
@@ -42,17 +43,17 @@ metadata: # kpt-merge: cnrm-system/cnrm-controller-manager-packagename
   - apiVersion: core.cnrm.cloud.google.com/v1beta1
     kind: ConfigConnectorContext
     name: configconnectorcontext.core.cnrm.cloud.google.com
-    namespace: packagename
+    namespace: dev
 ---
 apiVersion: iam.cnrm.cloud.google.com/v1beta1
 kind: IAMServiceAccount
 metadata: # kpt-merge: config-control/packagename-cc-robot
-  name: packagename-cc-robot
+  name: dev-cc-robot
   namespace: config-control
   annotations:
-    cnrm.cloud.google.com/project-id: googleprojectid
+    cnrm.cloud.google.com/project-id: dev-yuwenma-gke-catalyst--ryh5
     internal.kpt.dev/upstream-identifier: 'iam.cnrm.cloud.google.com|IAMServiceAccount|config-control|packagename-cc-robot'
-    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'
 spec:
   displayName: ConfigConnector ServiceAccount
   resourceID: cc-robot
@@ -60,7 +61,7 @@ spec:
 apiVersion: porch.kpt.dev/v1alpha1
 kind: WorkloadIdentityBinding
 metadata: # kpt-merge: config-control/packagename-cnrm-controller-manager
-  name: packagename-cnrm-controller-manager
+  name: dev-cnrm-controller-manager
   namespace: config-control
   annotations:
     internal.kpt.dev/upstream-identifier: 'porch.kpt.dev|WorkloadIdentityBinding|config-control|packagename-cnrm-controller-manager'
@@ -68,40 +69,40 @@ spec:
   resourceRef:
     apiVersion: iam.cnrm.cloud.google.com/v1beta1
     kind: IAMServiceAccount
-    name: packagename-cc-robot
+    name: dev-cc-robot
   serviceAccountRef:
-    name: cnrm-controller-manager-packagename
+    name: cnrm-controller-manager-dev
     namespace: cnrm-system
 ---
 apiVersion: iam.cnrm.cloud.google.com/v1beta1
 kind: IAMPolicyMember
 metadata: # kpt-merge: config-control/packagename-cc-robot
-  name: packagename-cc-robot
+  name: dev-cc-robot
   namespace: config-control
   annotations:
     internal.kpt.dev/upstream-identifier: 'iam.cnrm.cloud.google.com|IAMPolicyMember|config-control|packagename-cc-robot'
-    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'
 spec:
   memberFrom:
     serviceAccountRef:
-      name: packagename-cc-robot
+      name: dev-cc-robot
   role: roles/owner
   resourceRef:
     apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
     kind: Project
-    name: packagename
+    name: dev
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata: # kpt-merge: config-control/packagename-cnrm:cnrm-viewer
-  name: "packagename-cnrm:cnrm-viewer"
+  name: dev-cnrm:cnrm-viewer
   namespace: config-control
   annotations:
     internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|RoleBinding|config-control|packagename-cnrm:cnrm-viewer'
 subjects:
 - kind: ServiceAccount
   namespace: cnrm-system
-  name: cnrm-controller-manager-packagename
+  name: cnrm-controller-manager-dev
 roleRef:
   kind: ClusterRole
   name: cnrm-viewer
