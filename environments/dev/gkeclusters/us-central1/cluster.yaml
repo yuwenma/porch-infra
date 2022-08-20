@@ -13,13 +13,13 @@
 # limitations under the License.
 apiVersion: container.cnrm.cloud.google.com/v1beta1
 kind: ContainerCluster
-metadata: # kpt-merge: binding/packagename
+metadata: # kpt-merge: dev/packagename
   name: us-central1
-  namespace: binding
+  namespace: dev
   annotations:
     cnrm.cloud.google.com/remove-default-node-pool: "true"
     cnrm.cloud.google.com/state-into-spec: absent
-    internal.kpt.dev/upstream-identifier: 'container.cnrm.cloud.google.com|ContainerCluster|binding|packagename'
+    internal.kpt.dev/upstream-identifier: 'container.cnrm.cloud.google.com|ContainerCluster|dev|packagename'
     cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'
 spec:
   #description: cluster
@@ -31,11 +31,11 @@ spec:
 ---
 apiVersion: container.cnrm.cloud.google.com/v1beta1
 kind: ContainerNodePool
-metadata: # kpt-merge: binding/packagename-default
+metadata: # kpt-merge: dev/packagename-default
   name: us-central1-default
-  namespace: binding
+  namespace: dev
   annotations:
-    internal.kpt.dev/upstream-identifier: 'container.cnrm.cloud.google.com|ContainerNodePool|binding|packagename-default'
+    internal.kpt.dev/upstream-identifier: 'container.cnrm.cloud.google.com|ContainerNodePool|dev|packagename-default'
     cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'
 spec:
   location: us-central1
