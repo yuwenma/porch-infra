@@ -27,4 +27,4 @@ metadata: # kpt-merge: config-control/binding
   annotations:
     config.kubernetes.io/local-config: "binding"
     internal.kpt.dev/upstream-identifier: 'resourcemanager.cnrm.cloud.google.com|Project|config-control|binding'
-    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'

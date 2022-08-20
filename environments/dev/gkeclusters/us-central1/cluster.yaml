@@ -14,13 +14,13 @@
 apiVersion: container.cnrm.cloud.google.com/v1beta1
 kind: ContainerCluster
 metadata: # kpt-merge: binding/packagename
-  name: packagename
+  name: us-central1
   namespace: binding
   annotations:
     cnrm.cloud.google.com/remove-default-node-pool: "true"
     cnrm.cloud.google.com/state-into-spec: absent
     internal.kpt.dev/upstream-identifier: 'container.cnrm.cloud.google.com|ContainerCluster|binding|packagename'
-    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'
 spec:
   #description: cluster
   location: us-central1
@@ -32,11 +32,11 @@ spec:
 apiVersion: container.cnrm.cloud.google.com/v1beta1
 kind: ContainerNodePool
 metadata: # kpt-merge: binding/packagename-default
-  name: packagename-default
+  name: us-central1-default
   namespace: binding
   annotations:
     internal.kpt.dev/upstream-identifier: 'container.cnrm.cloud.google.com|ContainerNodePool|binding|packagename-default'
-    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'
 spec:
   location: us-central1
   autoscaling:
@@ -44,10 +44,10 @@ spec:
     maxNodeCount: 3
   nodeConfig:
     serviceAccountRef:
-      name: packagename-gke
+      name: us-central1-gke
   management:
     autoRepair: true
     autoUpgrade: true
   clusterRef:
-    name: packagename
+    name: us-central1
   resourceID: default
