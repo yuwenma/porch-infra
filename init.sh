@@ -7,12 +7,12 @@ kubectl apply -f - << EOF
 apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
 kind: Folder
 metadata:
-  name: root
+  name: root-2
   namespace: config-control
   annotations:
     cnrm.cloud.google.com/deletion-policy: "abandon"
 spec:
-  displayName: "root"
+  displayName: "root-2"
   folderRef:
     external: "${FOLDER_ID}"
 EOF

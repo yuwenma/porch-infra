@@ -17,9 +17,9 @@ metadata: # kpt-merge: packagename/container.googleapis.com
   annotations:
     cnrm.cloud.google.com/deletion-policy: "abandon"
     internal.kpt.dev/upstream-identifier: 'serviceusage.cnrm.cloud.google.com|Service|packagename|container.googleapis.com'
-    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn-live'
   name: container.googleapis.com
-  namespace: dev
+  namespace: dev3
 ---
 # Needed to grant GCP IAM permissions on projects
 apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
@@ -28,6 +28,6 @@ metadata: # kpt-merge: packagename/cloudresourcemanager.googleapis.com
   annotations:
     cnrm.cloud.google.com/deletion-policy: "abandon"
     internal.kpt.dev/upstream-identifier: 'serviceusage.cnrm.cloud.google.com|Service|packagename|cloudresourcemanager.googleapis.com'
-    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn-live'
   name: cloudresourcemanager.googleapis.com
-  namespace: dev
+  namespace: dev3

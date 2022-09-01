@@ -1,0 +1,55 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata: # kpt-merge: dev3/packagename
+  name: us-east1
+  namespace: dev3
+  annotations:
+    cnrm.cloud.google.com/remove-default-node-pool: "true"
+    cnrm.cloud.google.com/state-into-spec: absent
+    internal.kpt.dev/upstream-identifier: 'container.cnrm.cloud.google.com|ContainerCluster|dev3|packagename'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn-live'
+spec:
+  #description: cluster
+  location: us-east1
+  enableAutopilot: false
+  initialNodeCount: 1
+  releaseChannel:
+    channel: REGULAR
+  masterAuth:
+    clusterCaCertificate: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVMRENDQXBTZ0F3SUJBZ0lRYVBvMzBGYkFqRCsrL01tMHVLZ21pekFOQmdrcWhraUc5dzBCQVFzRkFEQXYKTVMwd0t3WURWUVFERXlRMk1EWTVORE5rT1MxbU9HTTRMVFE0TjJFdFlUaGpaQzFqWkRsaE0yVTNaR1ppWVRNdwpJQmNOTWpJd09ESTFNVEF4TlRBeldoZ1BNakExTWpBNE1UY3hNVEUxTUROYU1DOHhMVEFyQmdOVkJBTVRKRFl3Ck5qazBNMlE1TFdZNFl6Z3RORGczWVMxaE9HTmtMV05rT1dFelpUZGtabUpoTXpDQ0FhSXdEUVlKS29aSWh2Y04KQVFFQkJRQURnZ0dQQURDQ0FZb0NnZ0dCQUtudldjcTlKMEdxYys2OHAvRnlwVVNMK3N3RzUzR3Noeko3NWk3OAphNHlJVDdSMzNpMW9VS1RhL0x4cjUzcjZLL2M0Q3BaV3VsRURrbS9wR2lHWm1wN3MwRzRVd3ZYcVkzR20zQ2ZRClFtNlVjN2dpem9DRzNtMjV1eXlqR25YWFhkYUZrNG1OMUNWTTQrR1FvczFKYWJySDNaNGJtaU80MHNRSXJweXIKZFFsVUZUaWFTTHF3blpqWnFwMHZ1aEhCRHhuRWkzSkhYRDI5TmxxZGdDWHlXaXFoNlVWd3hzN2pVNXA5YWdSMgpqNnMwcHVOQmhlWE8vWFVpaHFsMmduWDdiQ0hMMnBVcENjWmM0S3hJSFMyT2hEMm1SZ0hOUm9MOUZlTitPbm1iClVJbFZ1cS9XdVJ3SFNrbEVPYlJDRDhtQ2lhdU5CMGpIeHJhTGNkMlJKTlg0UWNoTHRZOVlUZGJDNlRWck1EeTAKMW1BK05oc29TaEZmdGM4c3R5MUV0cExIZTY0SW9LSko5R0ZZVzQyQ3BGV2duWnpmbThBS2ozOXhHNkprb1d1awo3V0tGTUxsWlB6dzJ6V3BzV2lkQlhTOGxWY3Z0MG1xdGM5c0RpRG1JbGx6Mzc0SjVPSXhzNzhBTTIxaG5pNko2Cmw0RzJLY1hYNGVJSFllMGZLUzRRM0hXOWFRSURBUUFCbzBJd1FEQU9CZ05WSFE4QkFmOEVCQU1DQWdRd0R3WUQKVlIwVEFRSC9CQVV3QXdFQi96QWRCZ05WSFE0RUZnUVV6blVqQk41c0hpd3F1UUh3WUFQRWJRd1l2OE13RFFZSgpLb1pJaHZjTkFRRUxCUUFEZ2dHQkFEL0JiZTJWS3l5TUhoNlNzTTlvaHhrK0k0QTVCOVU0TVB1NkNlRmV3TGNZCi9sYVJZemZQRGUrRGFlNWZnT2ZISWFYa2VIdks0aW1ETUxZUU5YUUE5YlU1VWdaTXplMkpiaUlYeDYrWjdVNGsKSFN6L0FwL290OWN2TlQwMlFQYUFPK1c1L25PbjM4ZHVzQ2MrZDNiQ1FPa0wzS3JubXpoSDdzbjFoaXJRUXcwRgpabG8wWExIWnVNc1htQW1ZVXRsa3lWcUIwbWh4QVpjUkpBa1RMYnQ4RUdrRG5zTGhFYk1GV1lFL2ZKK1B5SmNsCm9xUUd2K1VZbGthUGYvVjVWaTNxRnJQZDZoUHdwanZOY0RMOEFpeFhKeGRiRjdNOHhnNmhLcVVHZkhaR1pvNXAKS1IxNENCaWpTL3NFT01XK0R3bDB5RHZmMXA5T1BENExEM1pDbmxLRVZhN0JMdHlmQ0RMdGJ0ME51R3NSN05meQpza2huQ1BHVTd1dnRIVjJYbWhvU1lMdnlkbWhHcDk0bkVHcTFVaGlPMWZGS0NDbXV1d0x6eDRmVmltSjN6Mk5mCkx0Qm1iOUZuUmZ5U01QT3lEc1RBSFpTNGxicGI2aTl0d3ZqVEFQSmdEemNvbEJiT2dTVHIyd0ljVVFoZi9OUDUKdjRVeE9LVExIcVV1RHA5QkFjMmRGUT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+---
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerNodePool
+metadata: # kpt-merge: dev3/packagename-default
+  name: us-east1-default-2
+  namespace: dev3
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'container.cnrm.cloud.google.com|ContainerNodePool|dev3|packagename-default'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn-live'
+spec:
+  location: us-east1
+  autoscaling:
+    minNodeCount: 1
+    maxNodeCount: 3
+  nodeConfig:
+    serviceAccountRef:
+      name: us-east1-gke
+  management:
+    autoRepair: true
+    autoUpgrade: true
+  clusterRef:
+    name: us-east1
+  resourceID: default-2

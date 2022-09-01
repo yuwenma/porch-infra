@@ -14,11 +14,11 @@
 apiVersion: iam.cnrm.cloud.google.com/v1beta1
 kind: IAMPartialPolicy
 metadata: # kpt-merge: config-control/packagename-editors
-  name: dev-editors
+  name: dev3-editors
   namespace: config-control
   annotations:
     internal.kpt.dev/upstream-identifier: 'iam.cnrm.cloud.google.com|IAMPartialPolicy|config-control|packagename-editors'
-    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn-live'
 spec:
   # TODO: Replace with group?
   bindings:
@@ -31,4 +31,4 @@ spec:
   resourceRef:
     apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
     kind: Project
-    name: dev
+    name: dev3

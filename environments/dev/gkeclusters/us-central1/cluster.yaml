@@ -13,14 +13,14 @@
 # limitations under the License.
 apiVersion: container.cnrm.cloud.google.com/v1beta1
 kind: ContainerCluster
-metadata: # kpt-merge: dev/packagename
+metadata: # kpt-merge: binding/packagename
   name: us-central1
-  namespace: dev
+  namespace: dev3
   annotations:
     cnrm.cloud.google.com/remove-default-node-pool: "true"
     cnrm.cloud.google.com/state-into-spec: absent
-    internal.kpt.dev/upstream-identifier: 'container.cnrm.cloud.google.com|ContainerCluster|dev|packagename'
-    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'
+    internal.kpt.dev/upstream-identifier: 'container.cnrm.cloud.google.com|ContainerCluster|binding|packagename'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn-live'
 spec:
   #description: cluster
   location: us-central1
@@ -28,15 +28,17 @@ spec:
   initialNodeCount: 1
   releaseChannel:
     channel: REGULAR
+  masterAuth:
+    clusterCaCertificate: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVMRENDQXBTZ0F3SUJBZ0lRVGpnbmhiQnRNTnJadTg1UDBBbjFuVEFOQmdrcWhraUc5dzBCQVFzRkFEQXYKTVMwd0t3WURWUVFERXlRNFlqUm1OVE16WkMxbU1UZG1MVFE0WmpJdFlUWTNNaTFoTnpSaU5EYzRPVGN5TkdVdwpJQmNOTWpJd09ESXpNVGt4TURJMVdoZ1BNakExTWpBNE1UVXlNREV3TWpWYU1DOHhMVEFyQmdOVkJBTVRKRGhpCk5HWTFNek5rTFdZeE4yWXRORGhtTWkxaE5qY3lMV0UzTkdJME56ZzVOekkwWlRDQ0FhSXdEUVlKS29aSWh2Y04KQVFFQkJRQURnZ0dQQURDQ0FZb0NnZ0dCQUpYdVFJN3pzT2U1QjJoRHdQTlc1UnF0TVZENE5ZS2lOS0xEcGNuSQphQU1rVzRDWkZkTmhOZHlxc3RiQStURzlhWFJLOFZXZUhrcys0V2FHQXc0YTJpM2tXYTRCNHRvVzVrTjZUQUJnCmtVMEw5aFc3bm5yeFlETkZQVEJTU3RMVDBzcU5lMC9HUERoWXdqeDZMTzE0Nmc2Nkd4TlRaaHorREFpRW4rQ3IKM2JQc2FHVlQ3TEpBZWlxQmdTQURHaG5Ndmx3K09FUnAyQ1M3YjlieTBVOE5meHlZQXErYmh5VUtuOXNrVCtEKwp1RWF0ZnQ3UktJTStLWHl4R3d3M2t4MnZSQXFhMGJxNXdUM29oVW5xQ3RURm1vc3BCa1RLcWdBYkxkSk9VNzRTCmJaQTZaOEdlWHM0RkhucWFqTXBTVTkzVmVpM3dBOU1HY3cvN3hvNFlGTzMxN1Y0Ryt5SHNLM1YrZmQ2cFovMXUKY2R5cStVeHl6Q202MkZ0QngxQ0lNUkFEZURSaGZGSWVEVTZweUJ4M0FkL1pjOVU1cEhQTTgyMWszblhhR3pZcgpIOHJrL3FpdVQ5cFNoVmpwWHFXU1c5WTRGQ2NUckFlNVZZQzlqMEpuSHUrc0ZWQ2xiMEV6Ujd2U3huSTJwOVVjClVCanIxVWVBb2xmQkxkSE1OSVNlcE53eVNRSURBUUFCbzBJd1FEQU9CZ05WSFE4QkFmOEVCQU1DQWdRd0R3WUQKVlIwVEFRSC9CQVV3QXdFQi96QWRCZ05WSFE0RUZnUVUyVkZxR3NBMHovNEFnbWZaTkFLZFhmbDVhYUl3RFFZSgpLb1pJaHZjTkFRRUxCUUFEZ2dHQkFBRCtDRUloc1N0dDdwWG8xQVFOOVdnVEppbXpEWVRZVXYxNEcwNlFuYzhFCjhScExPbXVUU2hSOTlyZVdOdzB3RDU2VGZhMTlOZWs0eFdjNnNKcDRZN0tIcVY1bkRsL21jblQ1cXg1c3NMeEoKenlZWjd6blhOTmpSSGxmeDlvZG56RnVwS1MwRU5MYnFaTGlKV2JiZlVCRllqWWNwelJFZGhQQXVYZDVBV3VIOQpsZE4wNVlYbGFXcGowTVBiQjZDL3RhR0MwRW1ObER2cTVkeW1vc0NUWmtuN09IeDk2SHJ3c2tWN3c2NHBML1pKCjNoZStxME1zTWc0QlNiNVdYQ0pTcVh5NVhoQytXZEtlVW1wV3MxdTBqWGk4cFgyRllpQXdSREkwQkI5YmlpbHQKK0JVRjU1dHdxa1RZMlBZYWU5VElUY1FZYzB3WUJNcVJ5NFFTN0o1OEszRUw1NS9qa2QrYUxsZzg1a1ViOG1RLwpzdWlpNUFpTktUWTh5Z3M2TmhZUnhlSmJlR2NFR3g4aGM3MW11UVdUSXpFcHJPNWd5a1lPMTl4akJueGdEZGRsCmNiNzRQZ21WQzFIdFRac0ZCU1RHSHhPbGpDcHhVUFd5R1F0aXZsdnEvcFVHdnpqT0htMFRZcCtHSHBycTdLRVMKeTl6VU53SzgxbExrWXB5Q0ltMmtBQT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
 ---
 apiVersion: container.cnrm.cloud.google.com/v1beta1
 kind: ContainerNodePool
-metadata: # kpt-merge: dev/packagename-default
+metadata: # kpt-merge: binding/packagename-default
   name: us-central1-default
-  namespace: dev
+  namespace: dev3
   annotations:
-    internal.kpt.dev/upstream-identifier: 'container.cnrm.cloud.google.com|ContainerNodePool|dev|packagename-default'
-    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn'
+    internal.kpt.dev/upstream-identifier: 'container.cnrm.cloud.google.com|ContainerNodePool|binding|packagename-default'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg-fn-live'
 spec:
   location: us-central1
   autoscaling:
